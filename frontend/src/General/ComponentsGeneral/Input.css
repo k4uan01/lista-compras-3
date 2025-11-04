@@ -1,0 +1,55 @@
+.general-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.general-input-label {
+  color: #333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.general-input {
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: inherit;
+  width: 100%;
+}
+
+.general-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.general-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.general-input-error {
+  border-color: #dc3545;
+}
+
+.general-input-error:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.general-input-error-message {
+  color: #dc3545;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.general-input-helper-text {
+  color: #666;
+  font-size: 12px;
+}
+

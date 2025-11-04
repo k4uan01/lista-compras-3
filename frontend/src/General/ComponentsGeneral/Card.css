@@ -1,0 +1,29 @@
+.general-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.general-card-header {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.general-card-title {
+  margin: 0;
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.general-card-subtitle {
+  margin: 4px 0 0 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.general-card-content {
+  padding: 20px;
+}
+
