@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { RegisterPage, LoginPage } from './Auth';
 import { NotFoundPage, HomePage } from './General';
-import { CreateProductPage } from './Products';
+import { CreateProductPage, EditProductPage } from './Products';
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/products/create" element={<CreateProductPage />} />
+        <Route path="/products/edit/:productId" element={<EditProductPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

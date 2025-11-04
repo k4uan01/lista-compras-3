@@ -1,0 +1,42 @@
+#Regras e informações do projeto
+
+#Informações
+- É um sistema de lista de compras
+
+#Cores
+- Cor principal = #19d400
+- Cor secundaria = #4700d4
+
+#Design
+- Sempre crie um bom Design
+
+#Responsividade
+- Sempre deixe o frontend responsivo
+- O sistema é apenas para desktop
+
+#Images padrão
+- Sem foto: https://npcegdhkrnfmqhjjzmmf.supabase.co/storage/v1/object/public/images/project/GD_imgSemImagem.png
+
+#Nomenclatura
+- Use UpperCamelCase (PascalCase) para:
+  - Arquivo de Páginas (com "Page" no final)
+  - Componentes
+  - Interfaces/Types
+  - Pastas de módulos
+
+- Use lowerCamelCase para:
+  - Variáveis
+  - Funções
+  - Parâmetros
+  - Props de componentes
+  - Estados (pageState, appState)
+  - Campos de objetos
+
+- Use lowercase_with_underscores (snake_case) apenas para:
+  - Campos de banco de dados (quando necessário)
+  - Variáveis de ambiente
+
+- Use lowercase ou kebab-case para:
+ - Rota de páginas
+
+- Sempre crie os nomes em ingles

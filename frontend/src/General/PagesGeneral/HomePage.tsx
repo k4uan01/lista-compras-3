@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import './HomePage.css';
 
+const DEFAULT_PRODUCT_IMAGE = 'https://npcegdhkrnfmqhjjzmmf.supabase.co/storage/v1/object/public/images/project/GD_imgSemImagem.png';
+
 interface Product {
   id: string;
   name: string;
@@ -226,14 +228,26 @@ export default function HomePage() {
               <div className="products-list">
                 {products.map((product) => (
                   <div key={product.id} className="product-card">
-                    {product.image && (
-                      <div className="product-image">
-                        <img src={product.image} alt={product.name} />
-                      </div>
-                    )}
+                    <div 
+                      className="product-image"
+                      onClick={() => navigate(`/products/edit/${product.id}`)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <img 
+                        src={product.image || DEFAULT_PRODUCT_IMAGE} 
+                        alt={product.name} 
+                      />
+                    </div>
                     <div className="product-body">
                       <div className="product-header">
                         <h4 className="product-name">{product.name}</h4>
+                        <button
+                          onClick={() => navigate(`/products/edit/${product.id}`)}
+                          className="edit-button"
+                          title="Editar produto"
+                        >
+                          ✏️
+                        </button>
                       </div>
                       <div className="product-details">
                         <div className="product-info">
