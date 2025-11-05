@@ -4,31 +4,45 @@
 - Projeto no GitHub
 - Conta na Vercel (gratuita)
 
+## Estrutura do Projeto
+
+```
+lista-compras/
+├── frontend/          # React + Vite (será hospedado no CDN)
+├── api/              # Serverless Functions (rotas /api/*)
+├── backend/          # Backend Express original (para dev local)
+├── vercel.json       # Configuração do deploy
+└── package.json      # Dependências para API functions
+```
+
 ## Passo a Passo
 
 ### 1. Preparar o Repositório
+
 Os arquivos de configuração já foram criados:
-- `vercel.json` - Configuração principal
-- `.vercelignore` - Arquivos ignorados no deploy
+- ✅ `vercel.json` - Configuração principal (sem warnings!)
+- ✅ `.vercelignore` - Arquivos ignorados no deploy
+- ✅ `api/` - Pasta com Serverless Functions
+- ✅ `package.json` - Dependências da raiz
 
 ### 2. Fazer Deploy na Vercel
 
-#### Opção A: Via Interface Web (Recomendado)
+#### Opção A: Via Interface Web (Recomendado) ⭐
 
 1. Acesse [vercel.com](https://vercel.com)
 2. Clique em **"Add New Project"**
 3. Importe seu repositório do GitHub
-4. Configure o projeto:
-   - **Framework Preset**: Vite
-   - **Root Directory**: `./` (raiz do projeto)
-   - **Build Command**: `npm run build --prefix frontend && npm run build --prefix backend`
-   - **Output Directory**: `frontend/dist`
+4. **IMPORTANTE**: A Vercel vai detectar automaticamente as configurações
+   - ✅ Framework: Vite (detectado automaticamente)
+   - ✅ Build Command: Definido no `vercel.json`
+   - ✅ Output Directory: `frontend/dist`
+   - ✅ Install Command: Definido no `vercel.json`
 
 5. Configure as variáveis de ambiente (se houver):
    - Clique em **"Environment Variables"**
    - Adicione suas variáveis (ex: chaves do Supabase)
    
-6. Clique em **"Deploy"**
+6. Clique em **"Deploy"** e aguarde!
 
 #### Opção B: Via CLI
 
@@ -61,27 +75,61 @@ Se seu projeto usa Supabase ou outras APIs, adicione as variáveis de ambiente:
 
 ## ⚠️ Importante
 
-### Para o Backend na Vercel:
-- O backend será executado como Serverless Functions
-- Cada requisição será uma função individual
-- **Limitação**: A Vercel tem timeout de 10s no plano gratuito
+### Estrutura de APIs na Vercel
 
-### Alternativas para o Backend:
-Se preferir hospedar o backend separadamente:
-- **Railway**: Deploy de Node.js com banco de dados
-- **Render**: Plano gratuito com containers
-- **Fly.io**: Deploy de aplicações full-stack
-- **Heroku**: Plano gratuito limitado
+A Vercel automaticamente converte arquivos na pasta `/api` em Serverless Functions:
 
-## 🔧 Estrutura de Deploy
+- **`/api/hello.ts`** → disponível em `https://seu-site.vercel.app/api/hello`
+- **`/api/health.ts`** → disponível em `https://seu-site.vercel.app/api/health`
 
+**Características:**
+- ✅ Cada arquivo é uma função independente
+- ✅ Auto-scaling automático
+- ✅ Deploy rápido
+- ⚠️ Timeout de 10s no plano gratuito
+- ⚠️ 100 GB de largura de banda/mês
+
+### Backend Local vs Produção
+
+**Desenvolvimento (Local):**
+- Use a pasta `backend/` com Express normalmente
+- Rode: `npm run dev --prefix backend`
+- Acesse: `http://localhost:3001`
+
+**Produção (Vercel):**
+- As funções da pasta `api/` serão usadas
+- Frontend: `https://seu-site.vercel.app`
+- API: `https://seu-site.vercel.app/api/*`
+
+### Alternativas para Backend Complexo:
+
+Se seu backend precisa de:
+- Conexões WebSocket persistentes
+- Jobs em background
+- Processamento > 10s
+
+**Considere hospedar separadamente:**
+- **Railway** - Ótimo para Node.js + PostgreSQL
+- **Render** - Plano gratuito generoso
+- **Fly.io** - Deploy global rápido
+- **Heroku** - Tradicional e confiável
+
+## 🔧 Como Adicionar Novas APIs
+
+1. Crie um arquivo em `/api/nome-da-funcao.ts`:
+
+```typescript
+import { VercelRequest, VercelResponse } from '@vercel/node';
+
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  // Seu código aqui
+  res.status(200).json({ message: 'Funcionou!' });
+}
 ```
-Vercel Deploy
-├── Frontend (React + Vite)
-│   └── Hospedado no CDN da Vercel
-└── Backend (Express + TypeScript)
-    └── Convertido para Serverless Functions
-```
+
+2. Acesse: `https://seu-site.vercel.app/api/nome-da-funcao`
+
+3. Deploy automático ao fazer push!
 
 ## 📝 Atualizações Automáticas
 
